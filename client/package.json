@@ -23,7 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:3002",
+  "homepage": "/sites/shoppinglist",
   "eslintConfig": {
     "extends": "react-app"
   },

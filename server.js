@@ -15,7 +15,7 @@ mongoose
   .catch(err => console.log('MongoDB Connection Failed: ', err));
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = require('./server.json').port;
 // Middleware to parse body as JSON
 app.use(express.json());
 
