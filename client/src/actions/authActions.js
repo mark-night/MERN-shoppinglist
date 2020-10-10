@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   USER_LOADED,
   USER_LOADING,
@@ -10,11 +9,12 @@ import {
   REGISTER_SUCCESS,
 } from './types';
 import { getError, clearError } from './errorActions';
+import { mongoDBAPI } from '../api/backendAPI';
 
 // check token and load user
 export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
-  axios
+  mongoDBAPI
     .get('/api/auth/user', loadUserConfig(getState))
     .then(({ data }) => {
       dispatch(clearError());
@@ -28,7 +28,7 @@ export const loadUser = () => (dispatch, getState) => {
 
 // Register user
 export const registerUser = user => dispatch => {
-  axios
+  mongoDBAPI
     .post('/api/users', user, {
       headers: { 'Content-Type': 'application/json' },
     })
@@ -48,7 +48,7 @@ export const logout = () => ({ type: LOGOUT_SUCCESS });
 // Login user
 export const login = user => dispatch => {
   // fetch token from server and update localStorage
-  axios
+  mongoDBAPI
     .post('/api/auth', user)
     .then(({ data }) => {
       dispatch(clearError());

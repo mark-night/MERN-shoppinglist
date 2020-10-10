@@ -1,16 +1,11 @@
 import { ADD_ITEM, DELETE_ITEM, GET_ITEMS } from './types';
 import { loadUserConfig } from './authActions';
 import { getError, clearError } from './errorActions';
-import axios from 'axios';
-
-const api = axios.create({
-  // 'proxy' value defined in package.json is automatically prepended
-  baseURL: '/api/items',
-});
+import { mongoDBAPI } from '../api/backendAPI';
 
 export const getItems = () => dispatch => {
-  api
-    .get('/')
+  mongoDBAPI
+    .get('/api/items')
     .then(({ data }) => {
       dispatch(clearError());
       dispatch({ type: GET_ITEMS, payload: data });
@@ -21,8 +16,8 @@ export const getItems = () => dispatch => {
 };
 
 export const addItem = itemName => (dispatch, getState) => {
-  api
-    .post('/', { name: itemName }, loadUserConfig(getState))
+  mongoDBAPI
+    .post('/api/items', { name: itemName }, loadUserConfig(getState))
     .then(({ data }) => {
       dispatch(clearError());
       dispatch({ type: ADD_ITEM, payload: data });
@@ -33,8 +28,8 @@ export const addItem = itemName => (dispatch, getState) => {
 };
 
 export const deleteItem = id => (dispatch, getState) => {
-  api
-    .delete(`/${id}`, loadUserConfig(getState))
+  mongoDBAPI
+    .delete(`/api/items/${id}`, loadUserConfig(getState))
     .then(() => {
       dispatch(clearError());
       dispatch({
