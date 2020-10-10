@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Item = require('../../models/Item');
+const auth = require('../../middleware/auth');
 
 // @route   GET   /api/items/
 // @desc    Get all items
@@ -12,21 +13,27 @@ router.get('/', (req, res) => {
 
 // @route   POST   /api/items/
 // @desc    Create (post) a new item
-// @access  Public
-router.post('/', (req, res) => {
-  const newItem = new Item({
-    name: req.body.name,
+// @access  Private <JWT>
+router.post('/', auth, (req, res) => {
+  const { name } = req.body;
+  if (!name)
+    return res.status(400).json({ msg: 'Item name can not be empty.' });
+  Item.findOne({ name: new RegExp(`^${name}$`, 'i') }).then(item => {
+    if (item)
+      return res.status(400).json({ msg: 'Item was already in the list.' });
+    const newItem = new Item({ name });
+    newItem.save().then(item => res.json(item));
   });
-  newItem.save().then(item => res.json(item));
 });
 
 // @route   DELETE   /api/items/
 // @desc    Delete an item
-// @access  Public
-router.delete('/:id', (req, res) => {
-  Item.findById(req.params.id)
-    .then(item => item.remove().then(() => res.json({ msg: 'Item removed.' })))
-    .catch(err => res.status(404).json({ msg: 'Item was not found.' }));
+// @access  Private <JWT>
+router.delete('/:id', auth, (req, res) => {
+  Item.findById(req.params.id).then(item => {
+    if (!item) return res.status(404).json({ msg: 'Item was not found.' });
+    item.remove().then(() => res.json({ msg: 'Item removed.' }));
+  });
 });
 
 module.exports = router;
