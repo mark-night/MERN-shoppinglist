@@ -15,7 +15,7 @@ import { mongoDBAPI } from '../api/backendAPI';
 export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
   mongoDBAPI
-    .get('/api/auth/user', loadUserConfig(getState))
+    .get('api/auth/user', loadUserConfig(getState))
     .then(({ data }) => {
       dispatch(clearError());
       dispatch({ type: USER_LOADED, payload: data });
@@ -29,7 +29,7 @@ export const loadUser = () => (dispatch, getState) => {
 // Register user
 export const registerUser = user => dispatch => {
   mongoDBAPI
-    .post('/api/users', user, {
+    .post('api/users', user, {
       headers: { 'Content-Type': 'application/json' },
     })
     .then(({ data }) => {
@@ -49,7 +49,7 @@ export const logout = () => ({ type: LOGOUT_SUCCESS });
 export const login = user => dispatch => {
   // fetch token from server and update localStorage
   mongoDBAPI
-    .post('/api/auth', user)
+    .post('api/auth', user)
     .then(({ data }) => {
       dispatch(clearError());
       dispatch({ type: LOGIN_SUCCESS, payload: data });

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const getToken = require('../../server-config').getToken;
+const getToken = require('../../token-config').getToken;
 const User = require('../../models/User');
 const auth = require('../../middleware/auth');
 

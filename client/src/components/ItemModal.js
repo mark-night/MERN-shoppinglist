@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   Modal,
@@ -17,7 +17,7 @@ export const ItemModal = () => {
   const [modal, setModal] = useState(false);
   const [itemName, setItemName] = useState('');
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const error = useSelector(state => state.error, shallowEqual);
+  const error = useSelector(state => state.error);
   const dispatch = useDispatch();
   const toggle = useCallback(() => setModal(state => !state), []);
   const onSubmit = useCallback(
@@ -35,7 +35,7 @@ export const ItemModal = () => {
       setModal(false);
       setItemName('');
     }
-  }, [error.id]);
+  }, [error]);
 
   return (
     <div>

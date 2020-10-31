@@ -1,6 +1,5 @@
 import axios from 'axios';
 
 export const mongoDBAPI = axios.create({
-  // baseURL: 'http://localhost:3002',
-  baseURL: '/sites/shoppinglist',
+  baseURL: process.env.BACKEND_BASEURL || process.env.PUBLIC_URL || '',
 });

@@ -1,0 +1,10 @@
+client/
+!client/build/
+**/.env
+**/.envrc
+**/.tool-versions
+**/node_modules
+**/.gitignore
+**/.git
+**/.http
+docker-compose.yml

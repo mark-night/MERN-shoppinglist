@@ -5,7 +5,7 @@ import { mongoDBAPI } from '../api/backendAPI';
 
 export const getItems = () => dispatch => {
   mongoDBAPI
-    .get('/api/items')
+    .get('api/items')
     .then(({ data }) => {
       dispatch(clearError());
       dispatch({ type: GET_ITEMS, payload: data });
@@ -17,7 +17,7 @@ export const getItems = () => dispatch => {
 
 export const addItem = itemName => (dispatch, getState) => {
   mongoDBAPI
-    .post('/api/items', { name: itemName }, loadUserConfig(getState))
+    .post('api/items', { name: itemName }, loadUserConfig(getState))
     .then(({ data }) => {
       dispatch(clearError());
       dispatch({ type: ADD_ITEM, payload: data });
@@ -29,7 +29,7 @@ export const addItem = itemName => (dispatch, getState) => {
 
 export const deleteItem = id => (dispatch, getState) => {
   mongoDBAPI
-    .delete(`/api/items/${id}`, loadUserConfig(getState))
+    .delete(`api/items/${id}`, loadUserConfig(getState))
     .then(() => {
       dispatch(clearError());
       dispatch({

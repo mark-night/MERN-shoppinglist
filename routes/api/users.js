@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
-const getToken = require('../../server-config').getToken;
+const getToken = require('../../token-config').getToken;
 
 // @route   POST   /api/users/
 // @desc    Register new user

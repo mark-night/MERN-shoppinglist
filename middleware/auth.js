@@ -1,4 +1,4 @@
-const tokenAuth = require('../server-config').tokenAuth;
+const tokenAuth = require('../token-config').tokenAuth;
 
 // Middleware is called with 3 arguments: request, response, next
 // Middleware calls next() to pass down request/response or skip to certain route
