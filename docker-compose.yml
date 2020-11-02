@@ -13,10 +13,8 @@ services:
 
   shoppinglist:
     build: .
-    # image: shoppinglist
-    # depends_on:
-    #   - mongodb
-    # restart: always
+    depends_on:
+      - mongodb
     ports:
       - '80:80'
     env_file: .env
