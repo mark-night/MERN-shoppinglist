@@ -1,6 +1,5 @@
 # Created by https://www.toptal.com/developers/gitignore/api/react,node,macos,vscode
 # Edit at https://www.toptal.com/developers/gitignore?templates=react,node,macos,vscode
-docker-compose.yml
 .http
 ### macOS ###
 # General

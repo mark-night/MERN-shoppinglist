@@ -9,7 +9,7 @@ const ready = envs.map(key => {
   return true;
 });
 if (!ready.every(v => v)) {
-  console.log('Abort...');
+  console.log('Some necessary environment variables are not set. Aborted.');
   process.exit(1);
 }
 

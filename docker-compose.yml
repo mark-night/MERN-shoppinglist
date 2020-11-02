@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:4-bionic
+    command: --auth
+    ports:
+      - '27017:27017'
+    volumes:
+      - db_mongo:/data/db
+      - configdb_mongo:/data/configdb
+    restart: always
+
+  shoppinglist:
+    build: .
+    # image: shoppinglist
+    # depends_on:
+    #   - mongodb
+    # restart: always
+    ports:
+      - '80:80'
+    env_file: .env
+    volumes:
+      - ./:/code
+    command: npx nodemon -L server.js
+
+volumes:
+  db_mongo:
+    external:
+      name: meetm_db_mongo
+  configdb_mongo:
+    external:
+      name: meetm_configdb_mongo

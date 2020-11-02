@@ -4,7 +4,6 @@ client/
 **/.envrc
 **/.tool-versions
 **/node_modules
-**/.gitignore
-**/.git
+**/.git*
 **/.http
 docker-compose.yml
