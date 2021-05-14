@@ -8,6 +8,7 @@
 .LSOverride
 .envrc
 .env
+.prettierrc*
 # Icon must end with two \r
 Icon
 

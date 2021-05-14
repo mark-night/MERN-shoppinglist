@@ -1,13 +1,12 @@
-# Expecting environment variable for TOKEN_KEY, TOKEN_AGE and MONGO_URI
-# Set BACKEND_BASEURL to the frontend serving path
+# Expecting environment variable for PORT, NODE_ENV, TOKEN_KEY, TOKEN_AGE and MONGO_URI
 FROM node:erbium-alpine
-ENV NODE_ENV=production
+LABEL io.meetm.app="shoppinglist" release="20210515" maintainer="Mark Ye <mark@meetm.io>"
+ENV NODE_ENV=${NODE_ENV:-production}
 
-WORKDIR /code
-COPY package*.json ./
-RUN npm install --production
+WORKDIR /app
 COPY . .
+RUN npm install --production
 
 EXPOSE 80
 
-CMD [ "node", "server.js" ]
+CMD node server.js

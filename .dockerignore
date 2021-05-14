@@ -1,9 +1,8 @@
-client/
-!client/build/
-**/.env
-**/.envrc
-**/.tool-versions
-**/node_modules
-**/.git*
-**/.http
-docker-compose.yml
+*
+!/client/build
+!/middleware
+!/models
+!/routes
+!/package*.json
+!/server.js
+!/token-config.js
